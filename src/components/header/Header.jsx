@@ -11,6 +11,12 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import BrushIcon from "@mui/icons-material/Brush";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { useContext, useState } from "react";
 import { ColorModeContext } from "../../theme";
@@ -24,9 +30,15 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-const pages = ["Home", "About", "Services", "Designs", "Finished", "Contact"];
+
+const pages = [
+  { link: "Home", icon: HomeIcon },
+  { link: "About", icon: InfoIcon },
+  { link: "Services", icon: DesignServicesIcon },
+  { link: "Designs", icon: BrushIcon },
+  { link: "Finished", icon: DoneAllIcon },
+  { link: "Contact", icon: ContactPhoneIcon },
+];
 
 function Header() {
   const colorMode = useContext(ColorModeContext);
@@ -45,13 +57,13 @@ function Header() {
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
-        {pages.map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {pages.map((item, index) => (
+          <ListItem key={item.link} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <item.icon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.link} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -126,11 +138,11 @@ function Header() {
           >
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.link}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.link}
               </Button>
             ))}
           </Box>
